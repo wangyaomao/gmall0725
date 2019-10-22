@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.gmall.user.mapper.UserInfoMapper">
+
+    <select id="selectAllUserAndAddress"  resultMap="selectAllUserAndAddressMap">
+        select info.id as user_id , address.id as address_id,info.*,address.* from user_info info , user_address address where info.id = address.user_id
+    </select>
+
+    <resultMap id="selectAllUserAndAddressMap" type="com.atguigu.gmall.bean.UserInfo" autoMapping="true">
+
+        <result column="user_id" property="id"></result>
+
+        <collection property="userAddressList" ofType="com.atguigu.gmall.bean.UserAddress" autoMapping="true">
+            <result column="address_id" property="id"></result>
+        </collection>
+
+    </resultMap>
+
+
+</mapper>
